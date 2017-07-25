@@ -3,7 +3,7 @@
 
 ## About
 
-This is a tutorial for the first code example for CS475 / CS675. The code can be downloaded from . When you untar the downloaded tgz file, you will find a cpp file **00_glInit.cpp** and a file named **Makefile**.
+This is a tutorial for the first code example for CS475 / CS675. When you untar the downloaded tgz file, you will find a cpp file **00_glInit.cpp** and a file named **Makefile**.
 
 
 ## Running the code
