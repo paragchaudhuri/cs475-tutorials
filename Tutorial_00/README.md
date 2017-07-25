@@ -1,10 +1,14 @@
 # Tutorial 0
 
+<br>
+<br>
 
 ## About
 
 This is a tutorial for the first code example for CS475 / CS675. When you untar the downloaded tgz file, you will find a cpp file **00_glInit.cpp** and a file named **Makefile**.
 
+<br>
+<br>
 
 ## Running the code
 Assuming you have everything set up (all relevant libraries etc.) you can compile the code by running
@@ -31,6 +35,8 @@ When the code is run, it will print the name of the renderer on your laptop and 
 Note that if you have an Nvidia graphics card, you might need to explicitly force it to run the program. Instead of running **./00 glInit** you should run **optirun ./00 glInit**. See the above example for reference. Without the graphics card, the PC only supports OpenGL 3.3 and below. With it, it
 supports OpenGL 4.4 and below.
 
+<br>
+<br>
 
 ## Understanding the code
 
