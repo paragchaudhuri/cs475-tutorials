@@ -1,11 +1,11 @@
-# Tutorial 1 : Drawing a Triangle
+# Tutorial 1 - Drawing a Triangle
 
 <br>
 <br>
 
 ## About
 
-This is a tutorial for the modern OpenGL version of the second code example for CS475 / CS675. When you untar the downloaded tgz file, you will find two cpp files **01_triangle.cpp** and **01_triangle_dep.cpp** and a file named **Makefile**. You will also find two shader files, **simple_fs.glsl** and **simple_vs.glsl**.
+In this tutorial we draw our first triangle with OpenGL. When you untar the downloaded tgz file, you will find two cpp files **01_triangle.cpp** and **01_triangle_dep.cpp** and a file named **Makefile**. You will also find two shader files, **simple_fs.glsl** and **simple_vs.glsl**.
 <br>
 <br>
 
