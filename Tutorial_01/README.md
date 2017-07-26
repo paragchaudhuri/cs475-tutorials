@@ -15,7 +15,7 @@ Assuming you have everything set up (all relevant libraries etc.) you can compil
 
 	make
 
-This will produce two executable files **01_triangle** and **01_triangle_dep**. To run them, do 01_triangle and 01_triangle_dep respectively.
+This will produce two executable files **01_triangle** and **01_triangle_dep**. 
 
 Both programs do the same thing. When run, they each open a window and display a purple triangle on a black background. The difference between the two is that they use different versions of OpenGL.
 
