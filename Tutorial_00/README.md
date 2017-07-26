@@ -19,7 +19,7 @@ This will produce a single executable file **00_glInit**. To run it, do
 
     ./00_glInit
 
-When the code is run, it will print the name of the renderer on your laptop and the highest version of OpenGL supported by your laptop. Here is how the output should look like of how it should look:
+When the code is run, it will print the name of the renderer on your laptop and the highest version of OpenGL supported by your laptop. Here is how the output should look like:
 
 	> naman@rastogi:~/Downloads/00_glInit$ make
 	g++ -I/usr/local/include 00_glInit.cpp -o 00_glInit -L/usr/local/lib  -lGL -lGLEW -lglfw
@@ -40,7 +40,7 @@ supports OpenGL 4.4 and below.
 
 ## Understanding the code
 
-Now let’s understand what exactly the code is doing, line-by-line.
+Now let us understand what exactly the code is doing, line-by-line.
 To start with, we include the **GLEW** library
 
 ```cpp
@@ -55,7 +55,7 @@ Next, we include the GLFW library.
 # include <GLFW/glfw3.h> // GLFW helper library
 ```
 
-GLFW is a utility library for OpenGL. As explained in class, OpenGL is a very bare-bones library, and it does not concern itself with the creation and management of windows. As far as it is concerned, it is your job as a programmer to set up windows and manage their dimensions and so on. It only cares about having someplace that it can draw into.
+GLFW is a utility library for OpenGL. OpenGL is a very bare-bones library, and it does not concern itself with the creation and management of windows. As far as it is concerned, it is the job of a programmer to set up windows and manage their dimensions and so on. It only cares about having someplace that it can draw onto.
 
 This is where GLFW comes in. It makes the job of creating and managing windows easy. It also helps in receiving input from the keyboard, mouse buttons and even joysticks.
 
@@ -77,7 +77,7 @@ int main (int argc, char** argv)
     } 
 ```
 
-**glfwInit()** attempts to initialize the **GLFW** library. Needless to say, it fails if something is wrong with your installation of GLFW, or if you lack some other important component. If it fails, it calls the **glfwTerminate()** function. If it succeeds, it is your job as the programmer to call glfwTerminate() before the main program ends.
+**glfwInit()** attempts to initialize the **GLFW** library. Needless to say, it fails if something is wrong with your installation of GLFW, or if you lack some other important component. If it fails, it calls the **glfwTerminate()** function. If it succeeds, it is the job of the programmer to call glfwTerminate() before the main program ends.
 
 Next, we give some hints to GLFW about what version of OpenGL we want to use, whether we want forward compatibility or not, and what OpenGL profile to use. If you are not using the OS X operating system, you can safely comment out these lines.
 
