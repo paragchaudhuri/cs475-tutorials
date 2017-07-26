@@ -14,7 +14,7 @@
 ### For OSX:
 
 * OpenGL is preinstalled on OSX.
-* To install GLEW and GLFW, use [Homebrew] (https://brew.sh/). All relevant instructions can be found on the Homebrew site. The packages are called glew and glfw3 
+* To install GLEW and GLFW, use [Homebrew](https://brew.sh/). All relevant instructions can be found on the Homebrew site. The packages are called glew and glfw3 
     
 <br>
 <br>
