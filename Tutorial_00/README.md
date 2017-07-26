@@ -38,14 +38,14 @@ This will produce a single executable file **00_glInit**. To run it, do
 
 When the code is run, it will print the name of the renderer on your laptop and the highest version of OpenGL supported by your laptop. Here is how the output should look like:
 
-	> naman@rastogi:~/Downloads/00_glInit$ make
+	> user@computer:~/Downloads/00_glInit$ make
 	g++ -I/usr/local/include 00_glInit.cpp -o 00_glInit -L/usr/local/lib  -lGL -lGLEW -lglfw
 	
-	> naman@rastogi:~/Downloads/00_glInit$ ./00_glInit 
+	> user@computer:~/Downloads/00_glInit$ ./00_glInit 
 	Renderer: Mesa DRI Intel(R) Ivybridge Mobile 
 	OpenGL version supported 3.3 (Core Profile) Mesa 17.0.3
 	
-	> naman@rastogi:~/Downloads/00_glInit$ optirun ./00_glInit 
+	> user@computer:~/Downloads/00_glInit$ optirun ./00_glInit 
 	Renderer: GeForce GT 540M/PCIe/SSE2
 	OpenGL version supported 4.4.0 NVIDIA 331.38
 
