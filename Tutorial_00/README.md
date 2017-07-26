@@ -1,11 +1,26 @@
-# Tutorial 0
+# Tutorial 0 - Getting Started with OpenGL 
 
 <br>
 <br>
+## Before you begin
 
-## About
+### For Ubuntu:
 
-This is a tutorial for the first code example for CS475 / CS675. When you untar the downloaded tgz file, you will find a cpp file **00_glInit.cpp** and a file named **Makefile**.
+* To install OpenGL libraries, install drivers for your graphics card from the `NVIDIA` or `AMD` websites or the Ubuntu repository.
+* If you do not have a graphics card or these do not work, install `libgl?-mesa-(dri, glx, dev)`. Ubuntu will automatically install the `Nouveau/Gallium` drivers.
+* To install GLEW, install `libglew?.XX` and `libglew-dev` packages.
+* To install GLFW, install `libglfw3` and `libglfw3-dev` packages. 
+
+### For OSX:
+
+* OpenGL is preinstalled on OSX.
+* To install GLEW and GLFW, use [Homebrew] (https://brew.sh/). All relevant instructions can be found on the Homebrew site. The packages are called glew and glfw3 
+    
+<br>
+<br>
+## About the tutorial
+
+This tutorial sets up a OpenGL context and queries for the available GL version. When you untar the downloaded tgz file, you will find a cpp file **00_glInit.cpp** and a file named **Makefile**.
 
 <br>
 <br>
