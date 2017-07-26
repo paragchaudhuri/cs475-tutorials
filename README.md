@@ -1,1 +1,1 @@
-# CS 475/675 tutorials
+# CS475 / CS675 tutorials
