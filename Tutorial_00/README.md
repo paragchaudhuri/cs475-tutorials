@@ -2,6 +2,7 @@
 
 <br>
 <br>
+
 ## Before you begin
 
 ### For Ubuntu:
@@ -18,6 +19,7 @@
     
 <br>
 <br>
+
 ## About the tutorial
 
 This tutorial sets up a OpenGL context and queries for the available GL version. When you untar the downloaded tgz file, you will find a cpp file **00_glInit.cpp** and a file named **Makefile**.
