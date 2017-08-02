@@ -5,7 +5,7 @@
 
 ## About
 
-This code is mostly same as the code of 01_triangle.cpp (Tutorial_01). So you might see quite a lot similarities.
+This code is mostly same as the code of *01_triangle.cpp* (Tutorial_01). So you might see quite a lot similarities.
 In this tutorial we draw a cube with OpenGL. When you untar the downloaded tgz file, you will find a cpp and a hpp file **03_colorcube.cpp** and **03_colorcube.hpp** and a file named **Makefile**. You will also find two shader files, **03_fshader.glsl** and **03_vshader.glsl**.
 
 <br>
@@ -80,9 +80,9 @@ glm::vec4 colors[8] = {
 };
 ```
 
-But here, we declare num vertices=36, now this has a reason. Since each object is expressed as triangles, we will construct every single face of a cube using two triangles.
+But here, we declare `num_vertices = 36`, now this has a reason. Since each object is expressed as triangles, we will construct every single face of a cube using two triangles.
 
-The next piece of code does exactly this thing. For every given value of a,b,c,d, it creates a face of a cube, by making two adjoint triangles looking as a square. Since we have specified the positions in a specific way, the calls made during the colorcube() command, create different faces of the cube, you can play around with these values to get a better understanding of this piece of code.
+The next piece of code does exactly this thing. For every given value of a,b,c,d, it creates a face of a cube, by making two adjoint triangles looking as a square. Since we have specified the positions in a specific way, the calls made during the *colorcube()* command, create different faces of the cube, you can play around with these values to get a better understanding of this piece of code.
 
 ```cpp
 // quad generates two triangles for each face and assigns colors to the vertices
@@ -113,7 +113,7 @@ void colorcube(void)
 
 ## Shaders
 
-The next piece of code void **initBuffersGL(void)**, is essentially what were the **initShadersGL()** and **initVertexBufferGL()** in the Tutorial_01.
+The next piece of code void *initBuffersGL(void)*, is essentially what were the *initShadersGL()* and *initVertexBufferGL()* in the Tutorial_01.
 
 ```cpp
 void initBuffersGL(void)
@@ -157,7 +157,7 @@ void initBuffersGL(void)
 ```
 
 We initially call the colorcube() method to populate the two vec4 arrays
-**v_positions** and **v_colors**. After generating vao and vbo, we create a buffer of size **(v_positions + v_colors)**. (Since our buffer is going to hold the color data as well as the position data for each vertex). In the next two lines,
+*v_positions* and *v_colors*. After generating vao and vbo, we create a buffer of size *(v_positions + v_colors)*. (Since our buffer is going to hold the color data as well as the position data for each vertex). In the next two lines,
 
 ```cpp
 glBufferSubData( GL_ARRAY_BUFFER, 0, sizeof(v_positions), v_positions );
@@ -168,7 +168,7 @@ We fill up the buffer using the two types of sub data, position and color. The s
 
 After this, we load the shaders and push them back into shaderlist vector, for the reference to the shaders.
 
-Then we specify how position and color data are stored in VBO using the vao, now as you remember, vertex attrib pointer, VAO, describes how vertex attributes are stored in the vertex buffer object, VBO. But, in this case we have two things that are to be stored in VBO, colors and positions. So, first we get the location of the parameter(vPosition and vColor), using `glGetAttribLocation()`. As, you can see that we have defined the same variables in the shader as well. If you remember, we mentioned in the tutorial 0 that the declaration of vPosition and vColor, in shader code may also be done using `layout(location = 0) in vec4 vp;`, the return value of `glGetAttribLocation()`, is the same location value from the shader program. Now, we can use glVertexAttribPointer, using the location for color and position pointers.
+Then we specify how position and color data are stored in *VBO* using the `vao`, now as you remember, vertex attrib pointer, *VAO*, describes how vertex attributes are stored in the vertex buffer object, *VBO*. But, in this case we have two things that are to be stored in *VBO*, colors and positions. So, first we get the location of the parameter(*vPosition* and *vColor*), using `glGetAttribLocation()`. As, you can see that we have defined the same variables in the shader as well. If you remember, we mentioned in the tutorial 0 that the declaration of *vPosition* and *vColor*, in shader code may also be done using `layout(location = 0) in vec4 vp;`, the return value of `glGetAttribLocation()`, is the same location value from the shader program. Now, we can use *glVertexAttribPointer*, using the location for color and position pointers.
 
 <br>
 <br>
@@ -202,7 +202,7 @@ rotation_matrix = glm::rotate(rotation_matrix, zrot, glm::vec3(0.0f,0.0f,1.0f));
   ortho_matrix = glm::ortho(-2.0, 2.0, -2.0, 2.0, -2.0, 2.0);
 ```
 
-In this piece of code we multiply the rotations about x,y and z axes to the rotation matrix. Initially we start with identity matrix (*glm::mat4(1.0f)*), then multiply the xrot, yrot and zrot one by one, the third parameter in glm::rotate() is the axis, along which we have to rotate. Also, in order to perform an orthographic projection, create a orthographic matrix with *glm::ortho()*, this sets up our orthographic projection matrix. The parameters given to it are our window co-ordinates in this order, left, right, bottom, top, z-near, z-far. Where, z-near and z-far are the location of near and far clipping plane. Finally, we multiply the ortho-matrix to rotation matrix, doing so applies the orthographic projection to model, when we multiply it to get our final coordinates in the shader.
+In this piece of code we multiply the rotations about x,y and z axes to the rotation matrix. Initially we start with identity matrix `glm::mat4(1.0f)`, then multiply the *xrot*, *yrot* and *zrot* one by one, the third parameter in `glm::rotate()` is the axis, along which we have to rotate. Also, in order to perform an orthographic projection, create a orthographic matrix with `glm::ortho()`, this sets up our orthographic projection matrix. The parameters given to it are our window co-ordinates in this order, left, right, bottom, top, z-near, z-far. Where, z-near and z-far are the location of near and far clipping plane. Finally, we multiply the ortho-matrix to rotation matrix, doing so applies the orthographic projection to model, when we multiply it to get our final coordinates in the shader.
 
 ```cpp
 glUniformMatrix4fv(uModelViewMatrix, 1, GL_FALSE, glm::value_ptr(modelview_matrix));
