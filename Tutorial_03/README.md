@@ -170,9 +170,6 @@ After this, we load the shaders and push them back into shaderlist vector, for t
 
 Then we specify how position and color data are stored in *VBO* using the `vao`, now as you remember, vertex attrib pointer, *VAO*, describes how vertex attributes are stored in the vertex buffer object, *VBO*. But, in this case we have two things that are to be stored in *VBO*, colors and positions. So, first we get the location of the parameter(*vPosition* and *vColor*), using `glGetAttribLocation()`. As, you can see that we have defined the same variables in the shader as well. If you remember, we mentioned in the tutorial 0 that the declaration of *vPosition* and *vColor*, in shader code may also be done using `layout(location = 0) in vec4 vp;`, the return value of `glGetAttribLocation()`, is the same location value from the shader program. Now, we can use *glVertexAttribPointer*, using the location for color and position pointers.
 
-<br>
-<br>
-
 ### Vertex Shader
 
 ```cpp
@@ -182,9 +179,6 @@ varying vec4 color;
 ```
 
 Unlike the first Tutorial, here instead of only specifying *gl_Postion*, we are also providing the color using the attributes *vPosition* and *vColor*, these attributes are the ones referred by `glGetAttribLocation()`.
-
-<br>
-<br>
 
 ### Fragment Shader
 
