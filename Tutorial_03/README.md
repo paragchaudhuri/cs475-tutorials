@@ -5,8 +5,7 @@
 
 ## About
 
-This code is mostly same as the code of 01_triangle.cpp (Tutorial_01). So
-you might see quite a lot similarities.
+This code is mostly same as the code of 01_triangle.cpp (Tutorial_01). So you might see quite a lot similarities.
 In this tutorial we draw a cube with OpenGL. When you untar the downloaded tgz file, you will find a cpp and a hpp file **03_colorcube.cpp** and **03_colorcube.hpp** and a file named **Makefile**. You will also find two shader files, **03_fshader.glsl** and **03_vshader.glsl**.
 
 <br>
@@ -50,8 +49,7 @@ GLuint shaderProgram;
 GLuint vbo, vao;
 ```
 
-Next up, we declare positions of 8 vertices and colors for each of the
-vertices, this is also pretty similar to the previous tutorial.
+Next up, we declare positions of 8 vertices and colors for each of the vertices, this is also pretty similar to the previous tutorial.
 
 ```cpp
 //6 faces, 2 triangles/face, 3 vertices/triangle
