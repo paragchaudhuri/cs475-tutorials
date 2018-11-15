@@ -15,6 +15,6 @@ void main (void)
 {
   gl_Position = uModelViewMatrix * vPosition;
   normal = (normalMatrix * normalize(vNormal)); 
-  eye = - (uModelViewMatrix * gl_Position); 
+  eye = -gl_Position; 
   COLOR = vColor; 
  }
