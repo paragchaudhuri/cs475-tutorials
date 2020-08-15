@@ -18,7 +18,7 @@
 GLuint shaderProgram;
 GLuint vbo, vao;
 
-glm::mat4 rotation_matrix;
+glm::mat4 rotation_matrix = glm::mat4(1.0f);
 glm::mat4 ortho_matrix;
 glm::mat4 modelview_matrix;
 GLuint uModelViewMatrix;
@@ -124,10 +124,11 @@ void initBuffersGL(void)
 void renderGL(void)
 {
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-  rotation_matrix = glm::rotate(glm::mat4(1.0f), xrot, glm::vec3(1.0f,0.0f,0.0f));
-  rotation_matrix = glm::rotate(rotation_matrix, yrot, glm::vec3(0.0f,1.0f,0.0f));
-  rotation_matrix = glm::rotate(rotation_matrix, zrot, glm::vec3(0.0f,0.0f,1.0f));
+  
+  //play around with the angles(2nd param) to change the rotation direction and speed
+  rotation_matrix = glm::rotate(rotation_matrix, 0.05f, glm::vec3(1.0f,0.0f,0.0f));
+  rotation_matrix = glm::rotate(rotation_matrix, 0.05f, glm::vec3(0.0f,1.0f,0.0f));
+  rotation_matrix = glm::rotate(rotation_matrix, 0.05f, glm::vec3(0.0f,0.0f,1.0f));
   ortho_matrix = glm::ortho(-2.0, 2.0, -2.0, 2.0, -2.0, 2.0);
 
   modelview_matrix = ortho_matrix * rotation_matrix;
