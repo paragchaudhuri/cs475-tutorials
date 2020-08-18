@@ -19,7 +19,7 @@ This will produce two executable files **01_triangle** and **01_triangle_dep**.
 
 Both programs do the same thing. When run, they each open a window and display a purple triangle on a black background. The difference between the two is that they use different versions of OpenGL.
 
-* The **01_triangle** executable is produced from the **01_triangle.cpp** file, which uses OpenGL 3.2 Core profile and is shader based.
+* The **01_triangle** executable is produced from the **01_triangle.cpp** file, which uses OpenGL 3.3 Core profile and is shader based.
 * The **01_triangle_dep** executable is produced from the **01_triangle_dep.cpp** file, which uses deprecated OpenGL 2.1 profile.
 * The shaders are present in the *.glsl files.
 * When you understand the existing tutorial code fully, edit and change both the versions to display a square made of two triangles, one magenta and one cyan. 
@@ -169,8 +169,8 @@ int main(int argc, char** argv)
     return -1;
 
   //We want OpenGL 4.0
-  glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4); 
-  glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
+  glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3); 
+  glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
   //This is for MacOSX - can be omitted otherwise
   glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE); 
   //We don't want the old OpenGL 
