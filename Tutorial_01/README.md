@@ -30,7 +30,7 @@ Both programs do the same thing. When run, they each open a window and display a
 
 ## Understanding the code : *01_triangle.cpp*
 
-Now let’s understand what exactly the code is doing, line-by-line. First let’s look at 01_triangle.cpp. It uses modern OpenGL, namely, OpenGL 4. You may not be able to run it if your laptop does not have the required hardware.
+Now let’s understand what exactly the code is doing, line-by-line. First let’s look at 01_triangle.cpp. It uses OpenGL 3.3. You may not be able to run it if your laptop does not have the required hardware.
 
 To start with, we include two header files containing a number of useful functions. I’ll explain what those files do later.
 
@@ -168,7 +168,7 @@ int main(int argc, char** argv)
   if (!glfwInit())
     return -1;
 
-  //We want OpenGL 4.0
+  //We want OpenGL 3.3
   glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3); 
   glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
   //This is for MacOSX - can be omitted otherwise
@@ -271,10 +271,10 @@ By the way, you might be wondering why we have a while loop in the first place. 
 Let’s look at the shaders. First, the vertex shader.
 
 ```c
-# version 400
+# version 330
 ```
 
-The first line is a version line. # version ABC means GLSL version A.BC, so we are using version 4.40 here. GLSL is a C-like shading language used to write shaders for OpenGL.
+The first line is a version line. # version ABC means GLSL version A.BC, so we are using version 3.30 here. GLSL is a C-like shading language used to write shaders for OpenGL.
 
 ```c
 in vec3 vp;
@@ -298,7 +298,7 @@ Suppose line in which vp was declared had been written this way: layout(location
 Now let’s look at the fragment shader.
 
 ```c
-# version 400
+# version 330
 out vec4 frag_colour ;
 void main ()
 {
