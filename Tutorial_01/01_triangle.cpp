@@ -68,8 +68,8 @@ int main(int argc, char** argv)
     return -1;
 
   //We want OpenGL 4.0
-  glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4); 
-  glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
+  glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3); 
+  glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
   //This is for MacOSX - can be omitted otherwise
   glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE); 
   //We don't want the old OpenGL 
