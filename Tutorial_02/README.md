@@ -15,26 +15,8 @@ In this tutorial we draw a cube with OpenGL. When you untar the downloaded tgz f
 ## Running the code
 
 Same as Tutorial_01, compilation of the code can be done using `make`.
-If you have a driver supporting OpenGL 4.1 then running `02_colorcube` will do the trick for you. But if your system supports OpenGL 3.2+. Then in order to run the code the following changes need to be made in the **02_colorcube.cpp**. In the line number 135 and 136,
 
-```cpp
-glfwWindowHint( GLFW_CONTEXT_VERSION_MAJOR, 4);
-glfwWindowHint( GLFW_CONTEXT_VERSION_MINOR, 1);
-```
-
-you need to change to
-
-```cpp
-glfwWindowHint( GLFW_CONTEXT_VERSION_MAJOR, 3);
-glfwWindowHint( GLFW_CONTEXT_VERSION_MINOR, 3);
-```
-
-Also in the **02_fshader.glsl** and **02_vshader.glsl** you need to modify the first line to
-```cpp
-# version 330
-```
-
-Once you make the above changes you can compile and run the 02_colorcube file.
+If you have a driver supporting OpenGL 3.3+ then running `02_colorcube` will do the trick for you. 
 
 <br>
 <br>
