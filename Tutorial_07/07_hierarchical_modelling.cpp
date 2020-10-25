@@ -1,5 +1,5 @@
 /*
-  CSX75 Tutorial 3
+  CSX75 Tutorial on Hierarchical Modelling
 
   Use the arrow keys and PgUp,PgDn, 
   keys to make the arms move.
@@ -119,7 +119,8 @@ void initBuffersGL(void)
   node2->change_parameters(2.0,0.0,0.0,0.0,0.0,0.0);
   node3 = new csX75::HNode(node2,num_vertices,v_positions,v_colors,sizeof(v_positions),sizeof(v_colors));
   node3->change_parameters(2.0,0.0,0.0,0.0,0.0,0.0);
-  root_node = curr_node = node3;
+  root_node = node1;
+  curr_node = node3;
 
 }
 
