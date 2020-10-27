@@ -19,16 +19,14 @@ GLuint shaderProgram;
 GLuint vbo[2], vao[2];
 
 glm::mat4 rotation_matrix;
-glm::mat4 projection_matrix;
 glm::mat4 c_rotation_matrix;
-glm::mat4 lookat_matrix;
 
 glm::mat4 model_matrix;
 glm::mat4 view_matrix;
+glm::mat4 projection_matrix;
 
-
-glm::mat4 modelview_matrix;
-GLuint uModelViewMatrix;
+glm::mat4 modelviewproject_matrix;
+GLuint uModelViewProjectMatrix;
 
 //-----------------------------------------------------------------
 
@@ -125,7 +123,7 @@ void initBuffersGL(void)
   // getting the attributes from the shader program
   GLuint vPosition = glGetAttribLocation( shaderProgram, "vPosition" );
   GLuint vColor = glGetAttribLocation( shaderProgram, "vColor" ); 
-  uModelViewMatrix = glGetUniformLocation( shaderProgram, "uModelViewMatrix");
+  uModelViewMatrix = glGetUniformLocation( shaderProgram, "uModelViewProjectMatrix");
 
   //Ask GL for two Vertex Attribute Objects (vao) , one for the colorcube and one for the plane.
   glGenVertexArrays (2, vao);
@@ -190,10 +188,11 @@ void renderGL(void)
   c_rotation_matrix = glm::rotate(c_rotation_matrix, glm::radians(c_yrot), glm::vec3(0.0f,1.0f,0.0f));
   c_rotation_matrix = glm::rotate(c_rotation_matrix, glm::radians(c_zrot), glm::vec3(0.0f,0.0f,1.0f));
 
-  glm::vec4 c_pos = glm::vec4(c_xpos,c_ypos,c_zpos, 1.0)*c_rotation_matrix;
-  glm::vec4 c_up = glm::vec4(c_up_x,c_up_y,c_up_z, 1.0)*c_rotation_matrix;
+  glm::vec4 c_pos = c_rotation_matrix*glm::vec4(c_xpos,c_ypos,c_zpos, 1.0);
+  glm::vec4 c_up = c_rotation_matrix*glm::vec4(c_up_x,c_up_y,c_up_z, 1.0);
+  
   //Creating the lookat matrix
-  lookat_matrix = glm::lookAt(glm::vec3(c_pos),glm::vec3(0.0),glm::vec3(c_up));
+  view_matrix = glm::lookAt(glm::vec3(c_pos),glm::vec3(0.0),glm::vec3(c_up));
 
   //creating the projection matrix
   if(enable_perspective)
@@ -202,17 +201,15 @@ void renderGL(void)
   else
     projection_matrix = glm::ortho(-2.0, 2.0, -2.0, 2.0, -5.0, 5.0);
 
-  view_matrix = projection_matrix*lookat_matrix;
-
-  // Draw cube
-  modelview_matrix = view_matrix*model_matrix;
-  glUniformMatrix4fv(uModelViewMatrix, 1, GL_FALSE, glm::value_ptr(modelview_matrix));
+    // Draw cube
+  modelviewproject_matrix = projection_matrix*view_matrix*model_matrix;
+  glUniformMatrix4fv(uModelViewProjectMatrix, 1, GL_FALSE, glm::value_ptr(modelviewproject_matrix));
   glBindVertexArray (vao[0]);
   glDrawArrays(GL_TRIANGLES, 0, num_vertices);
   
   // Draw plane
-  modelview_matrix = view_matrix;
-  glUniformMatrix4fv(uModelViewMatrix, 1, GL_FALSE, glm::value_ptr(modelview_matrix));
+  modelviewproject_matrix = view_matrix;
+  glUniformMatrix4fv(uModelViewProjectMatrix, 1, GL_FALSE, glm::value_ptr(modelviewproject_matrix));
   glBindVertexArray (vao[1]);
   glDrawArrays(GL_TRIANGLES, 0, 6);
 
@@ -231,8 +228,8 @@ int main(int argc, char** argv)
     return -1;
 
   //We want OpenGL 4.0
-  glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4); 
-  glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
+  glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3); 
+  glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
   //This is for MacOSX - can be omitted otherwise
   glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE); 
   //We don't want the old OpenGL 
