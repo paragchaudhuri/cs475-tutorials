@@ -1,15 +1,8 @@
 /*
-  CSX75 Tutorial 3
-
-  A program which opens a window and draws the "color cube."
-
-  Use the arrow keys and PgUp,PgDn,
-  keys to make the cube move.
-
+  CSX75 Tutorial 4
+ 
   Modified from An Introduction to OpenGL Programming, 
   Ed Angel and Dave Shreiner, SIGGRAPH 2013
-
-  Written by Parag Chaudhuri, 2015
 */
 
 
