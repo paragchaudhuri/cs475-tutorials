@@ -2,7 +2,6 @@
 
 <br>
 <br>
-
 ## About
 
 This code is mostly same as the code of 01_triangle.cpp (Tutorial_01). So
@@ -183,6 +182,9 @@ We use a uniform variable ModelViewProjectMatrix for the transformation that app
 ### Fragment Shader
 
 The fragment shader is quite similar to the code previous tutorial and you can easily see that we are assigning the color of the fragment, from our input from vertex shader.
+
+<br>
+<br>
 
 ### Rendering
 ```cpp
