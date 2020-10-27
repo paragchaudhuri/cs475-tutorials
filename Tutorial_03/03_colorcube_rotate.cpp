@@ -19,9 +19,10 @@ GLuint shaderProgram;
 GLuint vbo, vao;
 
 glm::mat4 rotation_matrix;
+glm::mat4 view_matrix;
 glm::mat4 ortho_matrix;
-glm::mat4 modelview_matrix;
-GLuint uModelViewMatrix;
+glm::mat4 modelviewproject_matrix;
+GLuint uModelViewProjectMatrix;
 
 //-----------------------------------------------------------------
 
@@ -128,11 +129,14 @@ void renderGL(void)
   rotation_matrix = glm::rotate(glm::mat4(1.0f), xrot, glm::vec3(1.0f,0.0f,0.0f));
   rotation_matrix = glm::rotate(rotation_matrix, yrot, glm::vec3(0.0f,1.0f,0.0f));
   rotation_matrix = glm::rotate(rotation_matrix, zrot, glm::vec3(0.0f,0.0f,1.0f));
-  ortho_matrix = glm::ortho(-2.0, 2.0, -2.0, 2.0, -2.0, 2.0);
+  
+  view_matrix = glm::lookAt(glm::vec3(0.0,0.0,-2.0),glm::vec3(0.0,0.0,0.0),glm::vec3(0.0,1.0,0.0));
+  
+  ortho_matrix = glm::ortho(-2.0, 2.0, -2.0, 2.0, -20.0, 20.0);
 
-  modelview_matrix = ortho_matrix * rotation_matrix;
+  modelviewproject_matrix = ortho_matrix * view_matrix * rotation_matrix;
 
-  glUniformMatrix4fv(uModelViewMatrix, 1, GL_FALSE, glm::value_ptr(modelview_matrix));
+  glUniformMatrix4fv(uModelViewProjectMatrix, 1, GL_FALSE, glm::value_ptr(modelviewproject_matrix));
   // Draw 
   glDrawArrays(GL_TRIANGLES, 0, num_vertices);
   
@@ -151,8 +155,8 @@ int main(int argc, char** argv)
     return -1;
 
   //We want OpenGL 4.0
-  glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4); 
-  glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
+  glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3); 
+  glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
   //This is for MacOSX - can be omitted otherwise
   glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE); 
   //We don't want the old OpenGL 
