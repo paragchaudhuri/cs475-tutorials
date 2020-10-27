@@ -15,6 +15,11 @@
 GLuint shaderProgram;
 GLuint vbo, vao;
 
+glm::mat4 view_matrix;
+glm::mat4 ortho_matrix;
+glm::mat4 modelviewproject_matrix;
+GLuint uModelViewProjectMatrix;
+
 //-----------------------------------------------------------------
 
 //6 faces, 2 triangles/face, 3 vertices/triangle
@@ -114,6 +119,12 @@ void renderGL(void)
 {
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+  view_matrix = glm::lookAt(glm::vec3(0.0,0.0,-2.0),glm::vec3(0.0,0.0,0.0),glm::vec3(0.0,1.0,0.0));
+
+  ortho_matrix = glm::ortho(-2.0f, 2.0f, -2.0f, 2.0f, -20.0f, 20.0f);
+  modelviewproject_matrix = ortho_matrix * view_matrix;
+
+  glUniformMatrix4fv(uModelViewProjectMatrix, 1, GL_FALSE, glm::value_ptr(modelviewproject_matrix));
   // Draw 
   glDrawArrays(GL_TRIANGLES, 0, num_vertices);
   
