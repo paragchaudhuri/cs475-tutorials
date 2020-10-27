@@ -119,7 +119,7 @@ void initBuffersGL(void)
   glEnableVertexAttribArray( vColor );
   glVertexAttribPointer( vColor, 4, GL_FLOAT, GL_FALSE, 0, BUFFER_OFFSET(sizeof(v_positions)) );
 
-  uModelViewMatrix = glGetUniformLocation( shaderProgram, "uModelViewMatrix");
+  uModelViewProjectMatrix = glGetUniformLocation( shaderProgram, "uModelViewMatrix");
 }
 
 void renderGL(void)
