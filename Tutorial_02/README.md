@@ -30,6 +30,11 @@ To start with, we have defined several variables, which we will come to later.
 ```cpp
 GLuint shaderProgram;
 GLuint vbo, vao;
+
+glm::mat4 view_matrix;
+glm::mat4 ortho_matrix;
+glm::mat4 modelviewproject_matrix;
+GLuint uModelViewProjectMatrix;
 ```
 
 Next up, we declare positions of 8 vertices and colors for each of the
@@ -163,11 +168,14 @@ Then we specify how position and color data are stored in VBO using the vao, now
 in vec4 vPosition;
 in vec4 vColor;
 out vec4 color;
+uniform mat4 ModelViewProjectMatrix;
 ```
 
 Unlike the first Tutorial, here instead of only specifying gl_Postion, we are
 also providing the color using the attributes vPosition and vColor, these
 attributes are the ones referred by glGetAttribLocation().
+
+We use a uniform variable ModelViewProjectMatrix for the transformation that applies the camera transforms and gets the points from WCS to NDCS.
 
 <br>
 <br>
@@ -175,3 +183,21 @@ attributes are the ones referred by glGetAttribLocation().
 ### Fragment Shader
 
 The fragment shader is quite similar to the code previous tutorial and you can easily see that we are assigning the color of the fragment, from our input from vertex shader.
+
+### Rendering
+```cpp
+glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+view_matrix = glm::lookAt(glm::vec3(0.0,0.0,-2.0),glm::vec3(0.0,0.0,0.0),glm::vec3(0.0,1.0,0.0));
+
+ortho_matrix = glm::ortho(-2.0f, 2.0f, -2.0f, 2.0f, -20.0f, 20.0f);
+modelviewproject_matrix = ortho_matrix * view_matrix;
+
+glUniformMatrix4fv(uModelViewProjectMatrix, 1, GL_FALSE, glm::value_ptr(modelviewproject_matrix));
+// Draw 
+glDrawArrays(GL_TRIANGLES, 0, num_vertices);
+```
+
+Here we clear the framebuffer and depthbuffer with glClear. Then we setup the WCS to VCS transform in view_matrix, followed by the VCS to CCS/NDCS transform in ortho_matrix and pass the composite result to the shader using glUniformMatrix4fv. Finally glDrawArrays issues the draw call that sends all the vertex data loaded in the VBO to the shader.
+
+
