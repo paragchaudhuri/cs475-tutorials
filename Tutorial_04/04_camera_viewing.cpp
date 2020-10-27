@@ -201,14 +201,14 @@ void renderGL(void)
   else
     projection_matrix = glm::ortho(-2.0, 2.0, -2.0, 2.0, -5.0, 5.0);
 
-    // Draw cube
+  // Draw cube
   modelviewproject_matrix = projection_matrix*view_matrix*model_matrix;
   glUniformMatrix4fv(uModelViewProjectMatrix, 1, GL_FALSE, glm::value_ptr(modelviewproject_matrix));
   glBindVertexArray (vao[0]);
   glDrawArrays(GL_TRIANGLES, 0, num_vertices);
   
   // Draw plane
-  modelviewproject_matrix = view_matrix;
+  modelviewproject_matrix = projection_matrix*view_matrix;
   glUniformMatrix4fv(uModelViewProjectMatrix, 1, GL_FALSE, glm::value_ptr(modelviewproject_matrix));
   glBindVertexArray (vao[1]);
   glDrawArrays(GL_TRIANGLES, 0, 6);
@@ -227,7 +227,7 @@ int main(int argc, char** argv)
   if (!glfwInit())
     return -1;
 
-  //We want OpenGL 4.0
+  //We want OpenGL 3.3
   glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3); 
   glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
   //This is for MacOSX - can be omitted otherwise
@@ -236,7 +236,7 @@ int main(int argc, char** argv)
   glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE); 
 
   //! Create a windowed mode window and its OpenGL context
-  window = glfwCreateWindow(512, 512, "CS475/CS675 Tutorial 3: Rotating  Colorcube", NULL, NULL);
+  window = glfwCreateWindow(512, 512, "CS475/CS675 Tutorial 4: Perspective and Orthographic Cameras", NULL, NULL);
   if (!window)
     {
       glfwTerminate();
