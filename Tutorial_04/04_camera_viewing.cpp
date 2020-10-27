@@ -116,7 +116,7 @@ void initBuffersGL(void)
   // getting the attributes from the shader program
   GLuint vPosition = glGetAttribLocation( shaderProgram, "vPosition" );
   GLuint vColor = glGetAttribLocation( shaderProgram, "vColor" ); 
-  uModelViewMatrix = glGetUniformLocation( shaderProgram, "uModelViewProjectMatrix");
+  uModelViewProjectMatrix = glGetUniformLocation( shaderProgram, "uModelViewProjectMatrix");
 
   //Ask GL for two Vertex Attribute Objects (vao) , one for the colorcube and one for the plane.
   glGenVertexArrays (2, vao);
@@ -184,7 +184,7 @@ void renderGL(void)
   glm::vec4 c_pos = c_rotation_matrix*glm::vec4(c_xpos,c_ypos,c_zpos, 1.0);
   glm::vec4 c_up = c_rotation_matrix*glm::vec4(c_up_x,c_up_y,c_up_z, 1.0);
   
-  //Creating the lookat matrix
+  //Creating the view matrix
   view_matrix = glm::lookAt(glm::vec3(c_pos),glm::vec3(0.0),glm::vec3(c_up));
 
   //creating the projection matrix
