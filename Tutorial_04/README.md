@@ -5,7 +5,7 @@
 
 ## About
 
-This tutorial an extension of the **Tutorial 03**. So you might see quite a lot similarities. The following things are new.
+This tutorial an extension of the **Tutorial 03**. The following things are new.
 
  - A Plane is added underneath the cube
  - A Camera is added that can be moved around the cube
@@ -16,33 +16,11 @@ This tutorial an extension of the **Tutorial 03**. So you might see quite a lot 
 
 ## Running the code
 
-If you have a driver supporting OpenGL 4.1 then running 04_colorcube will
-do the trick for you. But if your system supports OpenGL 3.2+. Then
-in order to run the code the following changes need to be made in the
-**04_camera_viewing.cpp**. In the line number 234 and 235,
-
-```cpp
-glfwWindowHint( GLFW_CONTEXT_VERSION_MAJOR, 4);
-glfwWindowHint( GLFW_CONTEXT_VERSION_MINOR, 1);
-```
-
-you need to change to
-
-```cpp
-glfwWindowHint( GLFW_CONTEXT_VERSION_MAJOR, 3);
-glfwWindowHint( GLFW_CONTEXT_VERSION_MINOR, 3);
-```
-
-Also in the **04_fshader.glsl** and **04_vshader.glsl** you need to modify the first line to 
-```cpp
-# version 330
-```
-
-Once you make the above changes you can compile and run the **04_camera_viewing** file.
+If you have a driver supporting OpenGL 3.3 then you just need to run 04_colorcube
 
 <br>
 <br>
-
+ 
 ## Understanding the code
 
 The understanding for the code of basics, VAOs, VBOs and Shaders is documented in the previous tutorials. This tutorial would not go into much detail about those again, but explain all the new stuff.
@@ -209,15 +187,15 @@ c_rotation_matrix = glm::rotate(glm::mat4(1.0f), glm::radians(c_xrot), glm::vec3
 c_rotation_matrix = glm::rotate(c_rotation_matrix, glm::radians(c_yrot), glm::vec3(0.0f,1.0f,0.0f));
 c_rotation_matrix = glm::rotate(c_rotation_matrix, glm::radians(c_zrot), glm::vec3(0.0f,0.0f,1.0f));
 
-glm::vec4 c_pos = glm::vec4(c_xpos,c_ypos,c_zpos, 1.0)*c_rotation_matrix;
-glm::vec4 c_up = glm::vec4(c_up_x,c_up_y,c_up_z, 1.0)*c_rotation_matrix;
-//Creating the lookat matrix
-lookat_matrix = glm::lookAt(glm::vec3(c_pos),glm::vec3(0.0),glm::vec3(c_up));
+glm::vec4 c_pos = c_rotation_matrix*glm::vec4(c_xpos,c_ypos,c_zpos, 1.0);
+glm::vec4 c_up = c_rotation_matrix*glm::vec4(c_up_x,c_up_y,c_up_z, 1.0);
+//Creating the view matrix
+view_matrix = glm::lookAt(glm::vec3(c_pos),glm::vec3(0.0),glm::vec3(c_up));
 ```
 
-In this piece of code we multiply the rotations about x,y and z axes to the camera rotation matrix and then multiply this matrix to the initial position of the camera to get its final location. This matrix is also multiplied to the initial up vector to rotate it appropriately. Note that the camera rotation matrix is just used to calculate the position of the camera, and not a part of the modelling-viewing matrix. Finally, the lookat matrix is created by using the function *glm::lookAt()*, which takes as parameters the position of the camera, the look-at vector and the up vector and outputs the appropriate transformation from the WCS to the VCS.
+In this piece of code we use the rotations about x,y and z axes to create the camera rotation matrix and then multiply this matrix to the initial position of the camera to get its final location. This matrix is also multiplied to the initial up vector to rotate it appropriately. Finally, the view matrix is created by using the function *glm::lookAt()*, which takes as parameters the position of the camera, the look-at vector and the up vector and outputs the appropriate transformation from the WCS to the VCS.
 
-Next, we create the projection matrices based on the current mode
+Next, we create the projection matrices based on the current mode.
 
 ```cpp
 //creating the projection matrix
@@ -229,25 +207,22 @@ else {
   projection_matrix = glm::ortho(-2.0, 2.0, -2.0, 2.0, -5.0, 5.0);
 }
 
-view_matrix = projection_matrix * lookat_matrix;
 ```
 
 *glm::ortho()* returns the orthographic projection matrix and was discussed in the last tutorial. *glm::frustum()* converts the frustum specified by the function to a unit cube as discussed in class, and can be directly used to obtain the perspective projection. The arguments to the function are the left, right, top and bottom at the near plane, the distance of the near plane and the far plane respectively. Alternatively, *glm::perspective()* function can also be used. It does the same thing as *glm::frustum()* but has different type of arguments viz. the field of view in the y direction, the y:x aspect ratio, the near plane and the far plane respectively. To enable or disable the perspective view, a boolean is modified based on a key press event, written in the key callback function and the appropriate matrix is chosen.
-
-With this we get the projection matrix, we multiply it the the lookat matrix to get the whole viewing transformation.
 
 Finally, we draw the objects with the appropriate transformation matrices.
 
 ```cpp
 // Draw cube
-modelview_matrix = view_matrix*model_matrix;
-glUniformMatrix4fv(uModelViewMatrix, 1, GL_FALSE, glm::value_ptr(modelview_matrix));
+modelviewproject_matrix = projection_matrix * view_matrix * model_matrix;
+glUniformMatrix4fv(uModelViewProjectMatrix, 1, GL_FALSE, glm::value_ptr(modelviewproject_matrix));
 glBindVertexArray (vao[0]);
 glDrawArrays(GL_TRIANGLES, 0, num_vertices);
 
 // Draw plane
 modelview_matrix = view_matrix;
-glUniformMatrix4fv(uModelViewMatrix, 1, GL_FALSE, glm::value_ptr(modelview_matrix));
+glUniformMatrix4fv(uModelViewProjectMatrix, 1, GL_FALSE, glm::value_ptr(modelviewproject_matrix));
 glBindVertexArray (vao[1]);
 glDrawArrays(GL_TRIANGLES, 0, 6);
 ```
@@ -265,9 +240,10 @@ For drawing each of the objects, the approptiate VAO is being bound and *glDrawA
 in vec4 vPosition;
 in vec4 vColor;
 out vec4 color;
+uniform mat4 uModelViewProjectMatrix;
 ```
 
-In the *main()* function here, instead of directly assigning the *vPosition* to *gl_position*, we multiply it with our Modelview Matrix, hence applying the required transformations. We are also providing the color using the attributes *vPosition* and *vColor*, which we defined in the *initBuffersGL()* call in our main code.
+In the *main()* function here, instead of directly assigning the *vPosition* to *gl_position*, we multiply it with our ModelViewProject matrix, hence applying the required transformations. We are also providing the color using the attributes *vPosition* and *vColor*, which we defined in the *initBuffersGL()* call in our main code.
 
 ### Fragment Shaders
 
