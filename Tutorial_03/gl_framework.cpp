@@ -41,11 +41,11 @@ namespace csX75
     else if (key == GLFW_KEY_RIGHT && action == GLFW_PRESS)
       yrot += 1.0;
     else if (key == GLFW_KEY_UP && action == GLFW_PRESS)
-      xrot += 1.0;
+      xrot -= 1.0;
     else if (key == GLFW_KEY_DOWN && action == GLFW_PRESS)
       xrot += 1.0;
     else if (key == GLFW_KEY_PAGE_UP && action == GLFW_PRESS)
-      zrot += 1.0;
+      zrot -= 1.0;
     else if (key == GLFW_KEY_PAGE_DOWN && action == GLFW_PRESS)
       zrot += 1.0;
   }
