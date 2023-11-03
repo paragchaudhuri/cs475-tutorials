@@ -1,0 +1,54 @@
+/////////////////////////
+glm::vec2 t_coords[4][6] = {
+  {glm::vec2( 0.0, 0.0),
+   glm::vec2( 0.0, 0.5),
+   glm::vec2( 0.5, 0.0),
+   glm::vec2( 0.5, 0.5)},
+  {glm::vec2( 0.5, 0.0),
+   glm::vec2( 0.5, 0.5),
+   glm::vec2( 1.0, 0.0),
+   glm::vec2( 1.0, 0.5)},
+  {glm::vec2( 0.0, 0.5),
+   glm::vec2( 0.0, 1.0),
+   glm::vec2( 0.5, 0.5),
+   glm::vec2( 0.5, 1.0)},
+  {glm::vec2( 0.5, 0.5),
+   glm::vec2( 0.5, 1.0),
+   glm::vec2( 1.0, 0.5),
+   glm::vec2( 1.0, 1.0)},
+
+};
+
+////////////////////
+void quad(int a, int b, int c, int d, int face)
+{
+  face = face%4;
+
+  v_colors[tri_idx] = color; v_positions[tri_idx] = positions[a]; 
+  v_normals[tri_idx] = normals[a]; 
+  tex_coords[tri_idx] = t_coords[face][1];
+  tri_idx++;
+  v_colors[tri_idx] = color; v_positions[tri_idx] = positions[b];
+  v_normals[tri_idx] = normals[b]; 
+  tex_coords[tri_idx] = t_coords[face][0];
+  tri_idx++;
+  v_colors[tri_idx] = color; v_positions[tri_idx] = positions[c]; 
+  v_normals[tri_idx] = normals[c]; 
+  tex_coords[tri_idx] = t_coords[face][2];
+  tri_idx++;
+  v_colors[tri_idx] = color; v_positions[tri_idx] = positions[a]; 
+  v_normals[tri_idx] = normals[a]; 
+  tex_coords[tri_idx] = t_coords[face][1];
+  tri_idx++;
+  v_colors[tri_idx] = color; v_positions[tri_idx] = positions[c]; 
+  v_normals[tri_idx] = normals[c]; 
+  tex_coords[tri_idx] = t_coords[face][2];
+  tri_idx++;
+  v_colors[tri_idx] = color; v_positions[tri_idx] = positions[d]; 
+  v_normals[tri_idx] = normals[d]; 
+  tex_coords[tri_idx] = t_coords[face][3];
+  tri_idx++;
+ }
+
+////////////////////
+  GLuint tex=LoadTexture("images/all1.bmp",256,256);
